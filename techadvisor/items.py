@@ -18,3 +18,8 @@ class TechadvisorItem(scrapy.Item):
     screen_resolution = scrapy.Field()
     contents = scrapy.Field()
     introduced = scrapy.Field()
+    text = scrapy.Field()
+    date_published = scrapy.Field()
+
+
+

@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy.exporters import JsonLinesItemExporter
+from .items import TechadvisorItem
 
 
 class TechadvisorPipeline(object):
@@ -14,7 +15,7 @@ class TechadvisorPipeline(object):
 class JsonExportPipeline(object):
 
     def __init__(self):
-        self.file_name = 'techadvisor_links_to_articles.json'
+        self.file_name = 'techadvisor_mobiles.json'
         self.file_handle = None
 
     def open_spider(self, spider):
@@ -32,5 +33,6 @@ class JsonExportPipeline(object):
         self.file_handle.close()
 
     def process_item(self, item, spider):
-        self.exporter.export_item(item)
-        return item
+        if isinstance(item, TechadvisorItem): 
+            self.exporter.export_item(item)
+            return item
